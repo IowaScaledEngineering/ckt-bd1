@@ -498,11 +498,11 @@ refdes=C2
 T 49000 62100 5 10 0 0 270 0 1
 symversion=0.1
 T 48400 61500 5 10 1 1 0 0 1
-value=22uF
-T 48600 61700 5 10 1 1 0 0 1
-footprint=1210
+value=10uF
+T 48600 61700 5 10 0 1 0 0 1
+footprint=0805
 T 48400 61300 5 10 1 1 0 0 1
-description=6.3V 1210
+description=25V
 }
 C 45800 62300 1 270 0 capacitor-1.sym
 {
@@ -649,4 +649,4 @@ refdes=D3
 C 55100 55100 1 0 0 gnd-1.sym
 N 55200 57700 55200 57200 4
 T 55800 55900 9 10 1 0 0 0 1
-Activity
+Power / Alive
