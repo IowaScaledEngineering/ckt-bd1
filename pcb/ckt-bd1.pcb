@@ -953,7 +953,7 @@ Element["" "SOT363" "D5" "unknown" 1450.00mil 900.00mil -9.00mil 55.50mil 0 100 
 
 	)
 
-Element["" "0805" "R3" "1k" 33.1579mm 450.00mil 82.21mil -76.50mil 0 100 ""]
+Element["" "0805" "R3" "1k" 33.1579mm 450.00mil 82.21mil -76.50mil 0 100 "selected"]
 (
 	Pad[35.43mil -3.93mil 35.43mil 3.93mil 51.18mil 20.00mil 57.18mil "1" "1" "square"]
 	Pad[-35.43mil -3.93mil -35.43mil 3.93mil 51.18mil 20.00mil 57.18mil "2" "2" "square"]
@@ -1635,7 +1635,7 @@ Layer(5 "silk")
 	Text[70.00mil 995.00mil 3 100 "GND" "clearline"]
 	Text[70.00mil 630.00mil 3 100 "D" "clearline"]
 	Text[70.00mil 415.00mil 3 100 "/D" "clearline"]
-	Text[1535.00mil 920.00mil 0 100 "+" "clearline"]
+	Text[1595.00mil 860.00mil 0 100 "+" "clearline"]
 	Text[1515.00mil 605.00mil 1 100 "SENSITIVE" "clearline"]
 	Text[1450.00mil 585.00mil 1 100 "MORE" "clearline"]
 	Text[1715.00mil 855.00mil 1 100 "DETECT" "clearline"]
