@@ -1,5 +1,8 @@
 *~
+*-
+*.new.pcb
+*.cmd
+*.net
 *.o
-*.elf
-*.hex
-*.lst
+*#
+
