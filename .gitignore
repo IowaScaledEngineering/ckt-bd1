@@ -1,11 +1,5 @@
-*-
 *~
-*#
 *.o
 *.elf
-*.bak
-*.cmd
-*.net
-
-
-
+*.hex
+*.lst
