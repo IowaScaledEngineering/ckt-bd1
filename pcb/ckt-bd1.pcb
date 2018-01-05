@@ -920,7 +920,7 @@ Element["" "R025" "R8" "unknown" 535.00mil 780.00mil -30.00mil 175.00mil 0 100 "
 
 	)
 
-Element["" "SOT89" "U1" "unknown" 695.00mil 33.4211mm -171.99mil 2.3688mm 0 100 ""]
+Element["" "SOT89" "U1" "unknown" 695.00mil 33.4211mm 28.01mil -3.8542mm 0 100 ""]
 (
 	Pad[59.06mil -59.84mil 59.06mil -18.90mil 37.80mil 24.00mil 43.80mil "1" "1" "pin,square"]
 	Pad[0.0000 -59.84mil 0.0000 58.26mil 37.80mil 0.0000 43.80mil "2" "2" "pin,square"]
@@ -937,7 +937,7 @@ Element["" "SOT89" "U1" "unknown" 695.00mil 33.4211mm -171.99mil 2.3688mm 0 100 
 
 	)
 
-Element["" "0805" "C1" "10uF" 540.00mil 1310.00mil 23.93mil -116.07mil 0 100 ""]
+Element["" "0805" "C1" "10uF" 540.00mil 1310.00mil -21.07mil 78.93mil 0 100 ""]
 (
 	Pad[-3.93mil -35.43mil 3.93mil -35.43mil 51.18mil 20.00mil 57.18mil "1" "1" "square"]
 	Pad[-3.93mil 35.43mil 3.93mil 35.43mil 51.18mil 0.0000 57.18mil "2" "2" "square"]
@@ -946,7 +946,7 @@ Element["" "0805" "C1" "10uF" 540.00mil 1310.00mil 23.93mil -116.07mil 0 100 ""]
 
 	)
 
-Element["" "bourns3266" "R7" "100k" 1680.00mil 500.00mil 35.00mil -205.00mil 0 100 ""]
+Element["" "bourns3266" "R7" "100k" 1680.00mil 500.00mil 30.00mil 150.00mil 0 100 ""]
 (
 	Attribute("author" "Nathan D. Holmes")
 	Attribute("copyright" "2012 Nathan D. Holmes")
@@ -1128,20 +1128,6 @@ Element["" "0805" "D2" "unknown" 1640.00mil 1010.00mil -2.36mil -101.50mil 0 100
 
 	)
 
-Element["" "TC2030-NL" "J4" "unknown" 750.00mil 1010.00mil 30.00mil 145.86mil 3 100 ""]
-(
-	Pin[0.0000 100.00mil 43.00mil 20.00mil 49.00mil 39.00mil "" "" "hole,edge2"]
-	Pin[200.00mil 60.00mil 43.00mil 20.00mil 49.00mil 39.00mil "" "" "hole,edge2"]
-	Pin[200.00mil 140.00mil 43.00mil 20.00mil 49.00mil 39.00mil "" "" "hole,edge2"]
-	Pad[50.00mil 125.00mil 50.00mil 125.00mil 31.00mil 20.00mil 37.00mil "1" "1" "nopaste"]
-	Pad[50.00mil 75.00mil 50.00mil 75.00mil 31.00mil 20.00mil 37.00mil "2" "2" "nopaste"]
-	Pad[100.00mil 125.00mil 100.00mil 125.00mil 31.00mil 20.00mil 37.00mil "3" "3" "nopaste"]
-	Pad[100.00mil 75.00mil 100.00mil 75.00mil 31.00mil 20.00mil 37.00mil "4" "4" "nopaste"]
-	Pad[150.00mil 125.00mil 150.00mil 125.00mil 31.00mil 20.00mil 37.00mil "5" "5" "edge2,nopaste"]
-	Pad[150.00mil 75.00mil 150.00mil 75.00mil 31.00mil 20.00mil 37.00mil "6" "6" "edge2,nopaste"]
-
-	)
-
 Element["" "0805" "C6" "0.1uF" 1475.00mil 1125.00mil 78.50mil -76.50mil 0 100 ""]
 (
 	Pad[35.43mil -3.93mil 35.43mil 3.93mil 51.18mil 20.00mil 57.18mil "1" "1" "square"]
@@ -1187,6 +1173,20 @@ Element["" "SOD123T" "D1" "unknown" 430.00mil 1295.00mil -30.00mil 120.00mil 0 1
 	ElementLine [-48.00mil 105.00mil 48.00mil 105.00mil 10.00mil]
 	ElementLine [-48.00mil -105.00mil 48.00mil -105.00mil 10.00mil]
 	ElementLine [-48.00mil 25.00mil 48.00mil 25.00mil 10.00mil]
+
+	)
+
+Element["" "TC2030-NL" "J4" "unknown" 750.00mil 1010.00mil 185.86mil -35.00mil 0 100 ""]
+(
+	Pin[0.0000 100.00mil 43.00mil 20.00mil 49.00mil 39.00mil "" "" "hole,edge2"]
+	Pin[200.00mil 60.00mil 43.00mil 20.00mil 49.00mil 39.00mil "" "" "hole,edge2"]
+	Pin[200.00mil 140.00mil 43.00mil 20.00mil 49.00mil 39.00mil "" "" "hole,edge2"]
+	Pad[50.00mil 125.00mil 50.00mil 125.00mil 31.00mil 20.00mil 37.00mil "1" "1" "nopaste"]
+	Pad[50.00mil 75.00mil 50.00mil 75.00mil 31.00mil 20.00mil 37.00mil "2" "2" "nopaste"]
+	Pad[100.00mil 125.00mil 100.00mil 125.00mil 31.00mil 20.00mil 37.00mil "3" "3" "nopaste"]
+	Pad[100.00mil 75.00mil 100.00mil 75.00mil 31.00mil 20.00mil 37.00mil "4" "4" "nopaste"]
+	Pad[150.00mil 125.00mil 150.00mil 125.00mil 31.00mil 20.00mil 37.00mil "5" "5" "edge2,nopaste"]
+	Pad[150.00mil 75.00mil 150.00mil 75.00mil 31.00mil 20.00mil 37.00mil "6" "6" "edge2,nopaste"]
 
 	)
 Layer(1 "top")
