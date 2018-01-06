@@ -802,8 +802,6 @@ Via[850.00mil 970.00mil 26.00mil 0.0000 0.0000 12.00mil "" ""]
 Via[1190.00mil 605.00mil 26.00mil 0.0000 0.0000 12.00mil "" ""]
 Via[1190.00mil 570.00mil 26.00mil 0.0000 0.0000 12.00mil "" ""]
 Via[1155.00mil 570.00mil 26.00mil 0.0000 0.0000 12.00mil "" ""]
-Via[1350.00mil 310.00mil 26.00mil 20.00mil 0.0000 12.00mil "" ""]
-Via[1200.00mil 415.00mil 26.00mil 20.00mil 0.0000 12.00mil "" ""]
 Via[1420.00mil 720.00mil 26.00mil 0.0000 0.0000 12.00mil "" ""]
 Via[1385.00mil 720.00mil 26.00mil 0.0000 0.0000 12.00mil "" ""]
 Via[1290.00mil 870.00mil 26.00mil 20.00mil 0.0000 12.00mil "" ""]
@@ -1128,7 +1126,7 @@ Element["" "0805" "D2" "unknown" 1640.00mil 1010.00mil -2.36mil -101.50mil 0 100
 
 	)
 
-Element["" "0805" "C6" "0.1uF" 1475.00mil 1125.00mil 78.50mil -76.50mil 0 100 ""]
+Element["" "0805" "C6" "0.1uF" 1475.00mil 1125.00mil -46.50mil 43.50mil 0 100 ""]
 (
 	Pad[35.43mil -3.93mil 35.43mil 3.93mil 51.18mil 20.00mil 57.18mil "1" "1" "square"]
 	Pad[-35.43mil -3.93mil -35.43mil 3.93mil 51.18mil 20.00mil 57.18mil "2" "2" "square"]
@@ -1457,6 +1455,16 @@ Layer(1 "top")
 	Line[1030.00mil 800.00mil 1030.00mil 945.00mil 10.00mil 20.00mil "clearline"]
 	Line[1030.00mil 945.00mil 1110.00mil 1025.00mil 10.00mil 20.00mil "clearline"]
 	Line[1665.00mil 790.00mil 1390.00mil 790.00mil 25.00mil 20.00mil "clearline"]
+	Line[945.00mil 375.00mil 1020.00mil 300.00mil 25.00mil 20.00mil "clearline"]
+	Line[1320.00mil 190.00mil 1340.00mil 210.00mil 25.00mil 20.00mil "clearline"]
+	Line[1340.00mil 210.00mil 1340.00mil 254.57mil 25.00mil 20.00mil "clearline"]
+	Line[1340.00mil 254.57mil 34.0469mm 255.00mil 25.00mil 20.00mil "clearline"]
+	Line[1022.50mil 297.50mil 1187.50mil 297.50mil 25.00mil 20.00mil "clearline"]
+	Line[1187.50mil 297.50mil 1205.00mil 280.00mil 25.00mil 20.00mil "clearline"]
+	Line[1205.00mil 280.00mil 1205.00mil 215.00mil 25.00mil 20.00mil "clearline"]
+	Line[1205.00mil 215.00mil 1230.00mil 190.00mil 25.00mil 20.00mil "clearline"]
+	Line[1230.00mil 190.00mil 1320.00mil 190.00mil 25.00mil 20.00mil "clearline"]
+	Line[1320.00mil 190.00mil 1330.00mil 200.00mil 25.00mil 20.00mil "clearline"]
 	Polygon("clearpoly")
 	(
 		[500.00mil 1320.00mil] [875.00mil 1320.00mil] [875.00mil 1480.00mil] [500.00mil 1480.00mil] 
@@ -1479,9 +1487,6 @@ Layer(2 "bottom")
 	Line[535.00mil 780.00mil 420.00mil 665.00mil 25.00mil 20.00mil "clearline"]
 	Line[420.00mil 665.00mil 365.00mil 665.00mil 25.00mil 20.00mil "clearline"]
 	Line[270.00mil 665.00mil 395.00mil 665.00mil 10.00mil 20.00mil "clearline"]
-	Line[1200.00mil 415.00mil 1200.00mil 335.00mil 25.00mil 20.00mil "clearline"]
-	Line[1200.00mil 335.00mil 1225.00mil 310.00mil 25.00mil 20.00mil "clearline"]
-	Line[1225.00mil 310.00mil 1350.00mil 310.00mil 25.00mil 20.00mil "clearline"]
 	Line[805.00mil 1035.00mil 835.00mil 1035.00mil 10.00mil 20.00mil "clearline"]
 	Line[835.00mil 1035.00mil 850.00mil 1050.00mil 10.00mil 20.00mil "clearline"]
 	Line[850.00mil 1050.00mil 850.00mil 1175.00mil 10.00mil 20.00mil "clearline"]
@@ -1537,7 +1542,7 @@ Layer(5 "silk")
 	Line[1460.00mil 615.00mil 1440.00mil 635.00mil 10.00mil 20.00mil "clearline"]
 	Line[1460.00mil 615.00mil 1480.00mil 635.00mil 10.00mil 20.00mil "clearline"]
 	Line[1795.00mil 1495.00mil 5.00mil 1495.00mil 10.00mil 20.00mil "clearline"]
-	Line[5.00mil 1495.00mil 5.00mil 5.00mil 10.00mil 20.00mil "clearline"]
+	Line[5.00mil 1495.00mil 5.00mil 5.00mil 10.00mil 20.00mil "clearline,selected"]
 	Line[5.00mil 5.00mil 1795.00mil 5.00mil 10.00mil 20.00mil "clearline"]
 	Line[1795.00mil 5.00mil 1795.00mil 1495.00mil 10.00mil 20.00mil "clearline"]
 	Arc[1495.00mil 620.00mil 35.00mil 35.00mil 10.00mil 20.00mil 0 90 "clearline"]
@@ -1549,7 +1554,6 @@ Layer(5 "silk")
 	Text[1515.00mil 605.00mil 1 100 "SENSITIVE" "clearline"]
 	Text[405.00mil 25.00mil 0 100 "Iowa Scaled" "clearline"]
 	Text[405.00mil 90.00mil 0 100 "Engineering" "clearline"]
-	Text[1375.00mil 475.00mil 0 100 "*" "clearline"]
 	Text[1450.00mil 585.00mil 1 100 "MORE" "clearline"]
 	Text[35.3944mm 32.1501mm 0 100 "*" "clearline"]
 	Text[1715.00mil 1155.00mil 1 100 "DETECT" "clearline"]
@@ -1559,6 +1563,8 @@ Layer(5 "silk")
 	Text[980.00mil 30.00mil 0 100 "CKT-BD1 v2.0" "clearline"]
 	Text[1015.00mil 1415.00mil 0 100 "www.iascaled.com" "clearline"]
 	Text[980.00mil 95.00mil 0 100 "CC BY-SA (C) 2018" "clearline"]
+	Text[1405.00mil 485.00mil 0 100 "*" "clearline"]
+	Text[1215.00mil 285.00mil 0 100 "*" "clearline"]
 )
 NetList()
 (
