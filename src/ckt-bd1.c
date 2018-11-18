@@ -255,6 +255,8 @@ int main(void)
 	initializeADC();
 	initializeDelays();
 
+	setAuxLEDOn();
+
 	sei();
 
 	while(1)
@@ -285,10 +287,10 @@ int main(void)
 			ADCSRA |= _BV(ADSC);
 		}
 
-		if (eventFlags & EVENT_1HZ_BLINK)
+/*		if (eventFlags & EVENT_1HZ_BLINK)
 			setAuxLEDOn();
 		else
-			setAuxLEDOff();
+			setAuxLEDOff();*/
 	}
 }
 
