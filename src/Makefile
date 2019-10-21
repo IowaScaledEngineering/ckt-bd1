@@ -26,12 +26,11 @@
 #*************************************************************************
 BASE_NAME = ckt-bd1
 
-# ATmega85 8MHz internal oscillator
-DEVICE  = attiny45
-F_CPU   = 8000000
-FUSE_L  = 0xE2
-FUSE_H  = 0xC5
-FUSE_E  = 0xFF
+# ATmega13A 9.6MHz internal oscillator
+DEVICE  = attiny13a
+F_CPU   = 9600000
+FUSE_L  = 0x1A
+FUSE_H  = 0xFB
 
 #OPTS = -DLONG_DELAY
 
@@ -75,7 +74,7 @@ terminal:
 fuse:
 	@[ "$(FUSE_H)" != "" -a "$(FUSE_L)" != "" -a "$(FUSE_E)" != "" ] || \
 		{ echo "*** Invalid Fuse values."; exit 1; }
-	$(AVRDUDE_SLOW) -U hfuse:w:$(FUSE_H):m -U lfuse:w:$(FUSE_L):m -U efuse:w:$(FUSE_E):m
+	$(AVRDUDE_SLOW) -U hfuse:w:$(FUSE_H):m -U lfuse:w:$(FUSE_L):m
 
 read:
 	$(AVRDUDE) -v

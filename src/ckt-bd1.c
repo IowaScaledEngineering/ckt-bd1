@@ -80,14 +80,18 @@ ISR(ADC_vect)
 		accumulator = 0;
 		count = 0;
 		workingChannel++;
-		
-		ADMUX = (ADMUX & 0xFE) | (workingChannel & 0x01);
-		
+
 		if (2 == workingChannel)
 		{
 			workingChannel = 0;
 			eventFlags |= EVENT_DO_BD_READ;
 		}
+
+		// Set point and current level are on ADC2 & ADC3
+		if (0 == workingChannel)
+			ADMUX = (ADMUX & 0xFC) | 0x02;
+		else
+			ADMUX = (ADMUX & 0xFC) | 0x03;
 	}
 
 	if (0 == (eventFlags & EVENT_DO_BD_READ))
@@ -102,13 +106,13 @@ void initialize10HzTimer(void)
 {
 	// Set up timer 0 for 100Hz interrupts
 	TCNT0 = 0;
-	OCR0A = 78;  // 8MHz / 1024 / 78 = 100Hz
+	OCR0A = 94;  // 9.6MHz / 1024 / 94 ~= 100Hz
 	TCCR0A = _BV(WGM01);
 	TCCR0B = _BV(CS02) | _BV(CS00);  // 1024 prescaler
-	TIMSK |= _BV(OCIE0A);
+	TIMSK0 |= _BV(OCIE0A);
 }
 
-ISR(TIMER0_COMPA_vect)
+ISR(TIM0_COMPA_vect)
 {
 	static uint8_t ticks = 0;
 	static uint8_t decisecs = 0;
@@ -152,12 +156,12 @@ void setOccupancyOff()
 	PORTB |= _BV(PB2);
 }
 
-void setAuxLEDOn()
+inline void setAuxLEDOn()
 {
 	PORTB |= _BV(PB0);
 }
 
-void setAuxLEDOff()
+inline void setAuxLEDOff()
 {
 	PORTB &= ~_BV(PB0);
 }
@@ -246,7 +250,6 @@ int main(void)
 	// Deal with watchdog first thing
 	MCUSR = 0;					// Clear reset status
 	init();
-
 
 	setOccupancyOff();
 	setAuxLEDOff();
