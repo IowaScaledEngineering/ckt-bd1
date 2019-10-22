@@ -27,18 +27,19 @@
 BASE_NAME = ckt-bd1
 
 # ATmega13A 9.6MHz internal oscillator
-DEVICE  = attiny13a
+DEVICE  = attiny13
 F_CPU   = 9600000
 FUSE_L  = 0x1A
 FUSE_H  = 0xFB
 
-#OPTS = -DLONG_DELAY
+PROGRAMMER_TYPE=iseavrprog
+PROGRAMMER_PORT=usb
 
 SRCS = $(BASE_NAME).c
 INCS = 
 
-AVRDUDE = avrdude -c usbtiny -P usb -p $(DEVICE) -B1
-AVRDUDE_SLOW = avrdude -c usbtiny -P usb -p $(DEVICE) -B32
+AVRDUDE = avrdude -P $(PROGRAMMER_PORT) -c $(PROGRAMMER_TYPE) -p $(DEVICE) -B16
+AVRDUDE_SLOW = avrdude -P $(PROGRAMMER_PORT) -c $(PROGRAMMER_TYPE) -p $(DEVICE) -B32
 
 OBJS = ${SRCS:.c=.o}
 INCLUDES = -I.
@@ -72,7 +73,7 @@ terminal:
 
 # rule for programming fuse bits:
 fuse:
-	@[ "$(FUSE_H)" != "" -a "$(FUSE_L)" != "" -a "$(FUSE_E)" != "" ] || \
+	@[ "$(FUSE_H)" != "" -a "$(FUSE_L)" != "" ] || \
 		{ echo "*** Invalid Fuse values."; exit 1; }
 	$(AVRDUDE_SLOW) -U hfuse:w:$(FUSE_H):m -U lfuse:w:$(FUSE_L):m
 
