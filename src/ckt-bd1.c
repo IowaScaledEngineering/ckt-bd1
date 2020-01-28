@@ -31,6 +31,7 @@ LICENSE:
 #include <avr/eeprom.h>
 #include <util/delay.h>
 #include <avr/wdt.h>
+#include <util/atomic.h>
 
 #define CHANNEL0_ON_DELAY   0x00
 #define CHANNEL0_OFF_DELAY  0x01
@@ -102,7 +103,7 @@ ISR(ADC_vect)
 }
 
 
-void initialize10HzTimer(void)
+void initialize100HzTimer(void)
 {
 	// Set up timer 0 for 100Hz interrupts
 	TCNT0 = 0;
@@ -116,7 +117,7 @@ ISR(TIM0_COMPA_vect)
 {
 	static uint8_t ticks = 0;
 	static uint8_t decisecs = 0;
-	
+
 	if (++ticks >= 10)
 	{
 		ticks = 0;
@@ -128,6 +129,7 @@ ISR(TIM0_COMPA_vect)
 			decisecs = 0;
 		}
 	}
+
 }
 
 void initializeADC()
@@ -140,7 +142,7 @@ void initializeADC()
 	ADCSRA = _BV(ADIF) | _BV(ADPS2) | _BV(ADPS1); // 64 prescaler, ~8.3kconv / s
 	ADCSRB = 0x00; // Free running mode
 	DIDR0  = _BV(ADC2D) | _BV(ADC3D);  // Turn ADC2/ADC3 pins into analog inputs
-	ADCSRA |= _BV(ADEN) | _BV(ADSC) | _BV(ADIE) | _BV(ADIF);
+	ADCSRA |= _BV(ADEN) | _BV(ADIE) | _BV(ADIF);
 }
 
 
@@ -172,6 +174,9 @@ void init(void)
 	wdt_reset();
 	wdt_enable(WDTO_250MS);
 	wdt_reset();
+
+	CLKPR = _BV(CLKPCE);
+	CLKPR = 0x00;
 
 	// Pin Assignments for PORTB/DDRB
 	//  PB0 - Power/Alive LED (out)
@@ -252,13 +257,10 @@ int main(void)
 	init();
 
 	setOccupancyOff();
-	setAuxLEDOff();
 
-	initialize10HzTimer();
+	initialize100HzTimer();
 	initializeADC();
 	initializeDelays();
-
-	setAuxLEDOn();
 
 	sei();
 
@@ -270,6 +272,7 @@ int main(void)
 		// can then process the analog detector inputs
 		if (eventFlags & EVENT_DO_BD_READ)
 		{
+			
 			// Do all the analog magic
 			processDetector();
 
@@ -278,9 +281,11 @@ int main(void)
 			else
 				setOccupancyOff();
 
-
 			// Clear the flag and start the next chain of conversions
-			eventFlags &= ~(EVENT_DO_BD_READ);
+			ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+			{
+				eventFlags &= ~(EVENT_DO_BD_READ);
+			}
 		}
 
 		if (EVENT_DO_ADC_RUN == (eventFlags & (EVENT_DO_ADC_RUN | EVENT_DO_BD_READ)))
@@ -288,12 +293,11 @@ int main(void)
 			// If the ISR tells us it's time to run the ADC again and we've handled the last read, 
 			// start the ADC again
 			ADCSRA |= _BV(ADSC);
+			ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+			{
+				eventFlags &= ~(EVENT_DO_ADC_RUN);
+			}
 		}
-
-/*		if (eventFlags & EVENT_1HZ_BLINK)
-			setAuxLEDOn();
-		else
-			setAuxLEDOff();*/
 	}
 }
 
