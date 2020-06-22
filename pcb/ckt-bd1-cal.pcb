@@ -1,11 +1,11 @@
-# release: pcb 4.0.2
+# release: pcb 20140316
 
 # To read pcb files, the pcb version (or the git source date) must be >= the file version
 FileVersion[20091103]
 
 PCB["" 1000.00mil 900.00mil]
 
-Grid[5.00mil 0.0000 0.0000 0]
+Grid[500.000000 0.0000 0.0000 0]
 PolyArea[200000000.000000]
 Thermal[0.500000]
 DRC[6.00mil 8.00mil 6.00mil 8.00mil 12.00mil 7.00mil]
@@ -787,8 +787,8 @@ Symbol['~' 12.00mil]
 )
 Attribute("PCB::grid::unit" "mil")
 Attribute("PCB::grid::size" "5.00mil")
-Via[315.00mil 335.00mil 26.00mil 0.0000 0.0000 12.00mil "" "thermal(1S)"]
-Via[635.00mil 565.00mil 26.00mil 0.0000 0.0000 12.00mil "" "thermal(1S)"]
+Via[315.00mil 335.00mil 26.00mil 0.0000 0.0000 12.00mil "" "thermal(0S,1S)"]
+Via[610.00mil 565.00mil 26.00mil 0.0000 0.0000 12.00mil "" "thermal(1S)"]
 
 Element["" "Standard SMT resistor, capacitor etc" "" "0805" 350.00mil 450.00mil -31.50mil -31.50mil 0 100 ""]
 (
@@ -799,7 +799,7 @@ Element["" "Standard SMT resistor, capacitor etc" "" "0805" 350.00mil 450.00mil 
 
 	)
 
-Element["" "Standard SMT resistor, capacitor etc" "" "0805" 600.00mil 400.00mil -31.50mil -31.50mil 0 100 ""]
+Element["" "Standard SMT resistor, capacitor etc" "" "0805" 575.00mil 400.00mil -31.50mil -31.50mil 0 100 ""]
 (
 	Pad[-35.43mil -3.93mil -35.43mil 3.93mil 51.18mil 20.00mil 57.18mil "1" "1" "square"]
 	Pad[35.43mil -3.93mil 35.43mil 3.93mil 51.18mil 20.00mil 57.18mil "2" "2" "square"]
@@ -808,7 +808,7 @@ Element["" "Standard SMT resistor, capacitor etc" "" "0805" 600.00mil 400.00mil 
 
 	)
 
-Element["" "Standard SMT resistor, capacitor etc" "" "0805" 600.00mil 500.00mil -31.50mil -31.50mil 0 100 ""]
+Element["" "Standard SMT resistor, capacitor etc" "" "0805" 575.00mil 500.00mil -31.50mil -31.50mil 0 100 ""]
 (
 	Pad[-35.43mil -3.93mil -35.43mil 3.93mil 51.18mil 20.00mil 57.18mil "1" "1" "square"]
 	Pad[35.43mil -3.93mil 35.43mil 3.93mil 51.18mil 20.00mil 57.18mil "2" "2" "square"]
@@ -816,14 +816,22 @@ Element["" "Standard SMT resistor, capacitor etc" "" "0805" 600.00mil 500.00mil 
 	ElementLine [-3.93mil 27.55mil 3.93mil 27.55mil 10.00mil]
 
 	)
-Layer(1 "top" "copper")
+Layer(1 "top")
 (
-	Line[564.57mil 400.00mil 564.57mil 500.00mil 10.00mil 20.00mil "clearline"]
-	Line[385.43mil 450.00mil 564.57mil 450.00mil 10.00mil 20.00mil "clearline"]
-	Line[635.00mil 565.00mil 635.00mil 400.00mil 10.00mil 20.00mil "clearline"]
-	Line[315.00mil 335.00mil 315.00mil 445.00mil 10.00mil 20.00mil "clearline"]
+	Line[385.43mil 450.00mil 540.00mil 450.00mil 10.00mil 20.00mil "clearline"]
+	Line[315.00mil 335.00mil 315.00mil 445.00mil 10.00mil 20.00mil ""]
+	Line[539.57mil 400.00mil 539.57mil 500.00mil 10.00mil 20.00mil "clearline"]
+	Line[610.00mil 565.00mil 610.00mil 400.00mil 10.00mil 20.00mil ""]
+	Polygon("clearpoly")
+	(
+		[20.00mil 20.00mil] [980.00mil 20.00mil] [980.00mil 355.00mil] [20.00mil 355.00mil] 
+	)
+	Polygon("clearpoly")
+	(
+		[20.00mil 545.00mil] [980.00mil 545.00mil] [980.00mil 880.00mil] [20.00mil 880.00mil] 
+	)
 )
-Layer(2 "bottom" "copper")
+Layer(2 "bottom")
 (
 	Polygon("clearpoly")
 	(
@@ -834,24 +842,24 @@ Layer(2 "bottom" "copper")
 		[20.00mil 880.00mil] [980.00mil 880.00mil] [980.00mil 545.00mil] [20.00mil 545.00mil] 
 	)
 )
-Layer(3 "outline" "outline")
+Layer(3 "outline")
 (
 	Line[0.0000 0.0000 1000.00mil 0.0000 10.00mil 20.00mil "clearline"]
 	Line[1000.00mil 0.0000 1000.00mil 900.00mil 10.00mil 20.00mil "clearline"]
 	Line[1000.00mil 900.00mil 0.0000 900.00mil 10.00mil 20.00mil "clearline"]
 	Line[0.0000 900.00mil 0.0000 0.0000 10.00mil 20.00mil "clearline"]
 )
-Layer(4 "bottommask" "copper")
+Layer(4 "bottommask")
 (
 	Polygon("clearpoly")
 	(
 		[0.0000 0.0000] [1000.00mil 0.0000] [1000.00mil 900.00mil] [0.0000 900.00mil] 
 	)
 )
-Layer(5 "bottom silk" "silk")
+Layer(5 "bottom silk")
 (
 )
-Layer(6 "top silk" "silk")
+Layer(6 "top silk")
 (
 	Line[20.00mil 275.00mil 125.00mil 275.00mil 10.00mil 20.00mil "clearline"]
 	Line[20.00mil 125.00mil 125.00mil 125.00mil 10.00mil 20.00mil "clearline"]
@@ -886,6 +894,9 @@ Layer(6 "top silk" "silk")
 	Text[830.00mil 245.00mil 0 100 "N" "clearline"]
 	Text[145.00mil 595.00mil 0 100 "N" "clearline"]
 	Text[830.00mil 595.00mil 0 100 "N" "clearline"]
+	Text[665.00mil 395.00mil 0 97 "Track Pwr" "clearline"]
+	Text[670.00mil 455.00mil 0 97 "Good" "clearline"]
+	Text[445.00mil 245.00mil 0 100 "v1.0" "clearline"]
 	Polygon("clearpoly")
 	(
 		[320.43mil 867.91mil] [316.47mil 865.20mil] [315.11mil 21.8631mm] [315.65mil 857.60mil] [317.61mil 855.10mil] 
