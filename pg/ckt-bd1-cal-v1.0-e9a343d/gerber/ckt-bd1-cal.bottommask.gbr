@@ -1,0 +1,23 @@
+G04 start of page 5 for group 3 idx 3 *
+G04 Title: (unknown), bottommask *
+G04 Creator: pcb 20140316 *
+G04 CreationDate: Thu 02 Jul 2020 08:46:43 PM GMT UTC *
+G04 For: railfan *
+G04 Format: Gerber/RS-274X *
+G04 PCB-Dimensions (mil): 1000.00 900.00 *
+G04 PCB-Coordinate-Origin: lower left *
+%MOIN*%
+%FSLAX25Y25*%
+%LNGROUP3*%
+%ADD22C,0.0120*%
+%ADD21C,0.0260*%
+%ADD20C,0.0001*%
+G54D20*G36*
+X0Y90000D02*X100000D01*
+Y0D01*
+X0D01*
+Y90000D01*
+G37*
+G54D21*X31500Y56500D03*
+X61000Y33500D03*
+G54D22*M02*
