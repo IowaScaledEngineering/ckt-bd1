@@ -38,12 +38,12 @@ PROGRAMMER_PORT=usb
 SRCS = $(BASE_NAME).c
 INCS = 
 
-AVRDUDE = avrdude -P $(PROGRAMMER_PORT) -c $(PROGRAMMER_TYPE) -p $(DEVICE) -B16
+AVRDUDE = avrdude -P $(PROGRAMMER_PORT) -c $(PROGRAMMER_TYPE) -p $(DEVICE) -B4
 AVRDUDE_SLOW = avrdude -P $(PROGRAMMER_PORT) -c $(PROGRAMMER_TYPE) -p $(DEVICE) -B32
 
 OBJS = ${SRCS:.c=.o}
 INCLUDES = -I.
-CFLAGS  = $(INCLUDES) -Wall -O2 -std=gnu99 -ffunction-sections -fdata-sections
+CFLAGS  = $(INCLUDES) -Wall -Os -std=gnu99 -ffunction-sections -fdata-sections
 LDFLAGS = -Wl,-gc-sections
 
 COMPILE = avr-gcc $(DEFINES) -DF_CPU=$(F_CPU) $(OPTS) $(CFLAGS) $(LDFLAGS) -mmcu=$(DEVICE)
