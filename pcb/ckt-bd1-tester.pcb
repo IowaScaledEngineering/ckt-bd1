@@ -1543,6 +1543,10 @@ Layer(2 "bottom" "copper")
 )
 Layer(3 "outline" "outline")
 (
+	Line[0.0000 0.0000 2600.00mil 0.0000 10.00mil 20.00mil "clearline"]
+	Line[2600.00mil 0.0000 2600.00mil 3500.00mil 10.00mil 20.00mil "clearline"]
+	Line[2600.00mil 3500.00mil 0.0000 3500.00mil 10.00mil 20.00mil "clearline"]
+	Line[0.0000 3500.00mil 0.0000 0.0000 10.00mil 20.00mil "clearline"]
 )
 Layer(4 "bottom silk" "silk")
 (
