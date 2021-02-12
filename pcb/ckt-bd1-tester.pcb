@@ -1223,8 +1223,8 @@ Element["hidename" "STANDOFF_HEX_n4" "H1" "unknown" 1820.00mil 1800.00mil -100.0
 
 Element["" "TERMBLK2_200MIL" "J2" "unknown" 1445.00mil 1830.00mil 0.0000 0.0000 2 100 ""]
 (
-	Pin[100.00mil 0.0000 80.00mil 30.00mil 86.00mil 48.00mil "Pin_2" "1" "square,edge2"]
-	Pin[-100.00mil 0.0000 80.00mil 30.00mil 86.00mil 48.00mil "Pin_3" "2" "edge2"]
+	Pin[100.00mil 0.0000 80.00mil 30.00mil 86.00mil 42.00mil "Pin_2" "1" "square,edge2"]
+	Pin[-100.00mil 0.0000 80.00mil 30.00mil 86.00mil 42.00mil "Pin_3" "2" "edge2"]
 	ElementLine [-200.00mil -128.00mil 200.00mil -128.00mil 10.00mil]
 	ElementLine [-200.00mil 172.00mil 200.00mil 172.00mil 10.00mil]
 	ElementLine [-200.00mil 128.00mil 200.00mil 128.00mil 10.00mil]
@@ -1235,8 +1235,8 @@ Element["" "TERMBLK2_200MIL" "J2" "unknown" 1445.00mil 1830.00mil 0.0000 0.0000 
 
 Element["" "TERMBLK2_200MIL" "J1" "unknown" 1045.00mil 1830.00mil 0.0000 0.0000 2 100 ""]
 (
-	Pin[100.00mil 0.0000 80.00mil 30.00mil 86.00mil 48.00mil "Pin_2" "1" "square,edge2"]
-	Pin[-100.00mil 0.0000 80.00mil 30.00mil 86.00mil 48.00mil "Pin_3" "2" "edge2,thermal(0X,1X)"]
+	Pin[100.00mil 0.0000 80.00mil 30.00mil 86.00mil 42.00mil "Pin_2" "1" "square,edge2"]
+	Pin[-100.00mil 0.0000 80.00mil 30.00mil 86.00mil 42.00mil "Pin_3" "2" "edge2,thermal(0X,1X)"]
 	ElementLine [-200.00mil -128.00mil 200.00mil -128.00mil 10.00mil]
 	ElementLine [-200.00mil 172.00mil 200.00mil 172.00mil 10.00mil]
 	ElementLine [-200.00mil 128.00mil 200.00mil 128.00mil 10.00mil]
