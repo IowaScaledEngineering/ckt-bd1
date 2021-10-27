@@ -322,7 +322,7 @@ T 37200 53700 9 10 1 0 0 0 2
 J1A is the optional C/MRI
 block detector footprint
 T 39800 52100 9 10 1 0 0 0 3
-J3 provides terminals
+H5A/B provides terminals
 for a wire leading track 
 power through the transformer
 C 36400 47500 0 0 0 title-bordered-A2.sym
