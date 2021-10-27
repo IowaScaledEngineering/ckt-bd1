@@ -27,16 +27,16 @@
 BASE_NAME = ckt-bd1
 
 # ATmega13A 9.6MHz internal oscillator
-DEVICE  = attiny13
-F_CPU   = 9600000
+DEVICE  = attiny85
+F_CPU   = 8000000
 FUSE_L  = 0x1A
 FUSE_H  = 0xFB
 
 PROGRAMMER_TYPE=iseavrprog
 PROGRAMMER_PORT=usb
 
-SRCS = $(BASE_NAME).c
-INCS = 
+SRCS = $(BASE_NAME).c ct-linearize.c bd1-hardware.c bd1-interrupts.c
+INCS = ct-linearize.h bd1-interrupts.h bd1-hardware.h
 
 AVRDUDE = avrdude -P $(PROGRAMMER_PORT) -c $(PROGRAMMER_TYPE) -p $(DEVICE) -B4
 AVRDUDE_SLOW = avrdude -P $(PROGRAMMER_PORT) -c $(PROGRAMMER_TYPE) -p $(DEVICE) -B32
