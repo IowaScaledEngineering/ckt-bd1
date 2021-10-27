@@ -157,6 +157,8 @@ void processDetector(uint16_t adc)
 
 int main(void)
 {
+	uint8_t calSwitchCounter = 0;
+	bool readyForCal = false;
 	// Deal with watchdog first thing
 	MCUSR = 0;					// Clear reset status
 
@@ -172,7 +174,7 @@ int main(void)
 	//  PB0 - Power/Setpoint LED (out)
 	//  PB1 - Occupancy LED - Detect (out)
 	//  PB2 - /Detect (out)
-	//  PB3 - Setpoint button
+	//  PB3 - Setpoint button (input, pullup ON!)
 	//  PB4 - Detector (in, analog, ADC2)
 	//  PB5 - Not used
 	//  PB6 - Not used
@@ -195,8 +197,6 @@ int main(void)
 	while(1)
 	{
 		wdt_reset();
-		
-		
 
 		if (eventFlags & EVENT_DO_BD_READ) 
 		{
@@ -210,11 +210,63 @@ int main(void)
 			else
 				setOccupancyOff();
 
-			// Clear the flag and start the next chain of conversions
-			ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+
+			// Check to see if the cal switch is down
+			if (getCalSwitchState())
 			{
-				eventFlags &= ~(EVENT_DO_BD_READ);
+				if (calSwitchCounter++ >= 24) // Adjust this - should be about 5 seconds
+				{
+					// Now we're in cal mode
+					readyForCal = true;					
+					setCalLEDOn();
+					calSwitchCounter = 24;
+				} else {
+					// Blink while we're waiting for the minimum hold time
+					if (eventFlags & EVENT_1HZ_BLINK)
+						setCalLEDOn();
+					else
+						setCalLEDOff();
+				}
+				
+			} else if (readyForCal) {  // Button is released and we were previously ready for cal
+				uint16_t adcCalValueFiltered = adcValue;
+
+				setCalLEDOn();
+				for(uint8_t i=0; i<32; i++)
+				{
+					ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+					{
+						eventFlags &= ~(EVENT_DO_BD_READ);
+					}
+
+					while (!(eventFlags & EVENT_DO_BD_READ));
+					adcCalValueFiltered += (adcValue - adcCalValueFiltered)/8;
+				}
+				
+				// If we were already primed for calibration, do it here
+				writeThresholdCalibration(adcCalValueFiltered);
+
+				for(uint8_t i=0; i<3; i++)
+				{
+					setCalLEDOff();
+					_delay_ms(250);
+					setCalLEDOn();
+					_delay_ms(100);
+				}
+				calSwitchCounter = 0;
+				readyForCal = false;
+
+			} else {
+				// Reset switch hold down timer
+				calSwitchCounter = 0;
+				setCalLEDOff();
 			}
+		}
+		
+		// Clear the flag and start the next chain of conversions
+		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+		{
+			eventFlags &= ~(EVENT_DO_BD_READ);
 		}
 	}
 }

@@ -24,6 +24,7 @@ LICENSE:
 #define _BD1_HARDWARE_H_
 
 #include <stdlib.h>
+#include <stdbool.h>
 #include <avr/io.h>
 inline void setOccupancyOn()
 {
@@ -37,16 +38,20 @@ inline void setOccupancyOff()
 	PORTB |= _BV(PB2);
 }
 
-inline void setAuxLEDOn()
+inline void setCalLEDOn()
 {
 	PORTB |= _BV(PB0);
 }
 
-inline void setAuxLEDOff()
+inline void setCalLEDOff()
 {
 	PORTB &= ~_BV(PB0);
 }
 
+inline bool getCalSwitchState()
+{
+	return (PINB & _BV(PB3))?false:true;
+}
 
 #endif
 
