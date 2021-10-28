@@ -46,7 +46,6 @@ LICENSE:
 #define CHANNEL0_THRESHOLD_OFF  0x04
 #define CHANNEL0_IDLE_CURRENT   0x06
 
-
 uint8_t detectorOnDelayCount = 0;
 uint8_t detectorOffDelayCount = 0;
 uint8_t detectorOnDelay = 4;
@@ -153,8 +152,6 @@ void processDetector(uint16_t adc)
 	}
 }
 
-#define max(a,b)  ((a>b)?(a):(b))
-
 int main(void)
 {
 	uint8_t calSwitchCounter = 0;
@@ -164,7 +161,7 @@ int main(void)
 
 	// Start Initialization
 	wdt_reset();
-	wdt_enable(WDTO_250MS);
+	wdt_enable(WDTO_1S);
 	wdt_reset();
 
 	CLKPR = _BV(CLKPCE);
@@ -234,6 +231,7 @@ int main(void)
 				setCalLEDOn();
 				for(uint8_t i=0; i<32; i++)
 				{
+					wdt_reset();
 					ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 					{
 						eventFlags &= ~(EVENT_DO_BD_READ);
