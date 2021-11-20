@@ -82,7 +82,7 @@ void writeThresholdCalibration(uint16_t adcValue)
 	uint8_t dma = ctCountToDecimilliamps(adcValue);
 	
 	threshold[THRESHOLD_ON] = ctDecimilliampsToCount(dma + (THRESHOLD_ON_MICROAMPS / 100));
-	threshold[THRESHOLD_OFF] = ctDecimilliampsToCount(dma + (THRESHOLD_OFF_MICROAMPS / 50));
+	threshold[THRESHOLD_OFF] = ctDecimilliampsToCount(dma + (THRESHOLD_OFF_MICROAMPS / 100));
 	
 	eeprom_write_word((uint16_t*)(CHANNEL0_IDLE_CURRENT), adcValue);
 	eeprom_write_word((uint16_t*)(CHANNEL0_THRESHOLD_ON), threshold[THRESHOLD_ON]);
@@ -180,10 +180,9 @@ int main(void)
 	PORTB = 0b00001100;
 
 	setOccupancyOff();
-	
+
+	initialize100HzTimer();	
 	initializeDelays();
-	initializeADC();
-	initialize100HzTimer();
 	initializeADC();
 	// End Initialization
 
@@ -200,6 +199,7 @@ int main(void)
 			// If all the analog inputs have been read, the flag will be set and we
 			// can then process the analog detector inputs
 			// Do all the analog magic
+
 			processDetector(adcValue);
 
 			if (detectorStatus)
@@ -207,6 +207,10 @@ int main(void)
 			else
 				setOccupancyOff();
 
+			ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+			{
+				eventFlags &= ~(EVENT_DO_BD_READ);
+			}
 
 			// Check to see if the cal switch is down
 			if (getCalSwitchState())
@@ -214,7 +218,7 @@ int main(void)
 				if (calSwitchCounter++ >= 24) // Adjust this - should be about 5 seconds
 				{
 					// Now we're in cal mode
-					readyForCal = true;					
+					readyForCal = true;
 					setCalLEDOn();
 					calSwitchCounter = 24;
 				} else {
@@ -226,19 +230,22 @@ int main(void)
 				}
 				
 			} else if (readyForCal) {  // Button is released and we were previously ready for cal
-				uint16_t adcCalValueFiltered = adcValue;
+				int32_t adcCalValueFiltered = adcValue;
 
 				setCalLEDOn();
+				
 				for(uint8_t i=0; i<32; i++)
 				{
 					wdt_reset();
+					while (!eventFlags & EVENT_DO_ADC_RUN);
+					triggerADC();
+					while (!(eventFlags & EVENT_DO_BD_READ));
+					wdt_reset();
+					adcCalValueFiltered += (adcValue - adcCalValueFiltered)/8;
 					ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 					{
-						eventFlags &= ~(EVENT_DO_BD_READ);
+						eventFlags &= ~(EVENT_DO_ADC_RUN | EVENT_DO_BD_READ);
 					}
-
-					while (!(eventFlags & EVENT_DO_BD_READ));
-					adcCalValueFiltered += (adcValue - adcCalValueFiltered)/8;
 				}
 				
 				// If we were already primed for calibration, do it here
@@ -247,25 +254,31 @@ int main(void)
 				for(uint8_t i=0; i<3; i++)
 				{
 					setCalLEDOff();
-					_delay_ms(250);
+					_delay_ms(100);
+					wdt_reset();
 					setCalLEDOn();
 					_delay_ms(100);
+					wdt_reset();
 				}
 				calSwitchCounter = 0;
 				readyForCal = false;
-
 			} else {
 				// Reset switch hold down timer
 				calSwitchCounter = 0;
 				setCalLEDOff();
 			}
 		}
+		else if (eventFlags & EVENT_DO_ADC_RUN) // Timer says we're ready for another run
+		{
+			// Restart ADC runs
+			triggerADC();
+			ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
+			{
+				eventFlags &= ~(EVENT_DO_ADC_RUN);
+			}
+		}
 		
 		// Clear the flag and start the next chain of conversions
-		ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
-		{
-			eventFlags &= ~(EVENT_DO_BD_READ);
-		}
 	}
 }
 

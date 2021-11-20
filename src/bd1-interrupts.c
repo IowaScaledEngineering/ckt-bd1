@@ -25,10 +25,17 @@ LICENSE:
 #include <avr/interrupt.h>
 #include <util/atomic.h>
 
+#include "bd1-hardware.h"
+#include "util/delay.h"
 #include "bd1-interrupts.h"
 
 volatile uint8_t eventFlags = 0;
 volatile uint16_t adcValue = 0;
+
+void triggerADC()
+{
+	ADCSRA |= _BV(ADSC);  // Trigger next ADC conversion
+}
 
 void initializeADC()
 {
@@ -36,8 +43,9 @@ void initializeADC()
 	ADMUX  = 0x02;  // AVCC reference, ADC2 starting channel
 	ADCSRA = _BV(ADIF) | _BV(ADPS2) | _BV(ADPS1); // 64 prescaler, ~8.3kconv / s
 	ADCSRB = 0x00; // Free running mode
-	DIDR0  = _BV(ADC2D);  // Turn ADC2/ADC3 pins into analog inputs
+	DIDR0  = _BV(ADC2D);  // Turn ADC2 (PB4) pin into analog inputs
 	ADCSRA |= _BV(ADEN) | _BV(ADIE) | _BV(ADIF);
+	triggerADC();
 }
 
 ISR(ADC_vect)
@@ -62,7 +70,7 @@ void initialize100HzTimer(void)
 {
 	// Set up timer 0 for 100Hz interrupts
 	TCNT0 = 0;
-	OCR0A = 94;  // 9.6MHz / 1024 / 94 ~= 100Hz
+	OCR0A = 78;  // 8MHz / 1024 / 78 ~= 100Hz
 	TCCR0A = _BV(WGM01);
 	TCCR0B = _BV(CS02) | _BV(CS00);  // 1024 prescaler
 	TIMSK |= _BV(OCIE0A);
@@ -84,5 +92,4 @@ ISR(TIM0_COMPA_vect)
 			decisecs = 0;
 		}
 	}
-
 }

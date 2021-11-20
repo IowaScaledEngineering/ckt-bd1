@@ -33,7 +33,7 @@ extern volatile uint8_t eventFlags;
 #define EVENT_1HZ_BLINK         0x04
 #define EVENT_CALIBRATION_MODE  0x08
 
-
+void triggerADC();
 void initializeADC();
 void initialize100HzTimer();
 

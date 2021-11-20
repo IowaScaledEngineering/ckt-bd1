@@ -96,8 +96,10 @@ uint16_t ctDecimilliampsToCount(uint8_t dma)
   uint8_t i;
   for(i=0; i<sizeof(ctXlateDMA) / sizeof(uint8_t); i++)
   {
-    if (pgm_read_byte(&ctXlateDMA[i]) > dma)
-      break;
+	if (pgm_read_byte(&ctXlateDMA[i]) == dma)
+		return(pgm_read_word(&ctXlateCount64[i]));
+	if (pgm_read_byte(&ctXlateDMA[i]) > dma)
+		break;
   }
 
   if (i == sizeof(ctXlateDMA) / sizeof(uint8_t))
