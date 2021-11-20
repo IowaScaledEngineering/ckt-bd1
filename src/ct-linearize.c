@@ -96,9 +96,10 @@ uint16_t ctDecimilliampsToCount(uint8_t dma)
   uint8_t i;
   for(i=0; i<sizeof(ctXlateDMA) / sizeof(uint8_t); i++)
   {
-	if (pgm_read_byte(&ctXlateDMA[i]) == dma)
+	uint8_t thisDma = pgm_read_byte(&ctXlateDMA[i]);
+	if (thisDma == dma)
 		return(pgm_read_word(&ctXlateCount64[i]));
-	if (pgm_read_byte(&ctXlateDMA[i]) > dma)
+	if (thisDma > dma)
 		break;
   }
 
@@ -113,7 +114,7 @@ uint16_t ctDecimilliampsToCount(uint8_t dma)
   uint8_t dma_n = (uint8_t)pgm_read_byte(&ctXlateDMA[i]);
   uint8_t dma_n1 = (uint8_t)pgm_read_byte(&ctXlateDMA[i-1]);
 
-  return (dma - dma_n) * ((count_n - count_n1)/(dma_n - dma_n1)) + dma_n1;
+  return count_n1 + (dma - dma_n) * ((count_n - count_n1)/(dma_n - dma_n1));
 }
 
 uint8_t ctCountToDecimilliamps(uint16_t count64)
@@ -121,7 +122,11 @@ uint8_t ctCountToDecimilliamps(uint16_t count64)
   uint8_t i;
   for(i=0; i<sizeof(ctXlateCount64) / sizeof(uint16_t); i++)
   {
-    if ((uint16_t)pgm_read_word(&ctXlateCount64[i]) > count64)
+	uint16_t thisCount = (uint16_t)pgm_read_word(&ctXlateCount64[i]);
+    if (thisCount == count64)
+      return (uint8_t)pgm_read_byte(&ctXlateDMA[i]);
+ 
+    if (thisCount > count64)
       break;
   }
 
