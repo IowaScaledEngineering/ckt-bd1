@@ -46,6 +46,12 @@ LICENSE:
 #define CHANNEL0_THRESHOLD_OFF  0x04
 #define CHANNEL0_IDLE_CURRENT   0x06
 
+#define CHANNEL0_IDLE_CURRENT_DMA   0x10
+#define CHANNEL0_THRESHOLD_ON_DMA   0x11
+#define CHANNEL0_THRESHOLD_OFF_DMA  0x12
+
+
+
 uint8_t detectorOnDelayCount = 0;
 uint8_t detectorOffDelayCount = 0;
 uint8_t detectorOnDelay = 4;
@@ -83,6 +89,10 @@ void writeThresholdCalibration(uint16_t adcValue)
 	
 	threshold[THRESHOLD_ON] = ctDecimilliampsToCount(dma + (THRESHOLD_ON_MICROAMPS / 100));
 	threshold[THRESHOLD_OFF] = ctDecimilliampsToCount(dma + (THRESHOLD_OFF_MICROAMPS / 100));
+	
+	eeprom_write_byte((uint8_t*)(CHANNEL0_IDLE_CURRENT_DMA), dma);
+	eeprom_write_byte((uint8_t*)(CHANNEL0_THRESHOLD_ON_DMA), dma + (THRESHOLD_ON_MICROAMPS / 100));
+	eeprom_write_byte((uint8_t*)(CHANNEL0_THRESHOLD_OFF_DMA), dma + (THRESHOLD_OFF_MICROAMPS / 100));
 	
 	eeprom_write_word((uint16_t*)(CHANNEL0_IDLE_CURRENT), adcValue);
 	eeprom_write_word((uint16_t*)(CHANNEL0_THRESHOLD_ON), threshold[THRESHOLD_ON]);
@@ -237,7 +247,7 @@ int main(void)
 				for(uint8_t i=0; i<32; i++)
 				{
 					wdt_reset();
-					while (!eventFlags & EVENT_DO_ADC_RUN);
+					while (!(eventFlags & EVENT_DO_ADC_RUN));
 					triggerADC();
 					while (!(eventFlags & EVENT_DO_BD_READ));
 					wdt_reset();
