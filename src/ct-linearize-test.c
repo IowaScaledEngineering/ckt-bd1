@@ -155,19 +155,72 @@ uint8_t ctCountToDecimilliamps(uint16_t count64)
   
   return (count64 - count_n1) / ((count_n - count_n1) / (dma_n - dma_n1)) + dma_n1;
 }
+
+#define THRESHOLD_ON  0
+#define THRESHOLD_OFF 1
+#define THRESHOLD_ON_MICROAMPS  1000
+#define THRESHOLD_OFF_MICROAMPS  500
+uint16_t threshold[2];
+
 void testfunc(uint16_t i)
-	{
-		uint8_t dma = ctCountToDecimilliamps(i);
-		uint16_t count = ctDecimilliampsToCount(dma);
-		
-		printf("%05d  %02d.%01d %05d\n\n", i, dma/10, dma%10, count);
-		
-	}
+{
+	uint8_t dma = ctCountToDecimilliamps(i);
+	uint16_t count = ctDecimilliampsToCount(dma);
+
+	printf("Actual: %05d  %02d.%01d %05d\n\n", i, dma/10, dma%10, count);
+
+	threshold[THRESHOLD_ON] = ctDecimilliampsToCount(dma + (THRESHOLD_ON_MICROAMPS / 100));
+	threshold[THRESHOLD_OFF] = ctDecimilliampsToCount(dma + (THRESHOLD_OFF_MICROAMPS / 100));
+
+	printf("Off threshold:  %05d\n\n", threshold[THRESHOLD_OFF]);
+	printf("On threshold:  %05d\n\n", threshold[THRESHOLD_ON]);
+}
+
+#define CHANNEL0_ON_DELAY       0x00
+#define CHANNEL0_OFF_DELAY      0x01
+#define CHANNEL0_THRESHOLD_ON   0x02
+#define CHANNEL0_THRESHOLD_OFF  0x04
+#define CHANNEL0_IDLE_CURRENT   0x06
+#define CHANNEL0_IDLE_CURRENT_2 0x08
+
+#define CHANNEL0_IDLE_CURRENT_DMA   0x10
+#define CHANNEL0_THRESHOLD_ON_DMA   0x11
+#define CHANNEL0_THRESHOLD_OFF_DMA  0x12
+
+void eeprom_write_byte(uint8_t* p, uint8_t v)
+{
+	printf("Addr 0x%02X:  [%02X] (%d)\n", (uint8_t)p, v, v);
+}
+
+void eeprom_write_word(uint16_t* p, uint16_t v)
+{
+	printf("Addr 0x%02X:  [%02X%02X] (%d)\n", (uint8_t)p, v & 0xFF, v>>8, v);
+}
+
+
+void writeThresholdCalibration(uint16_t adcValue)
+{
+	// Threshold ON is idle + 1mA
+	// Threshold OFF is idle + 0.5mA
+	
+	uint8_t dma = ctCountToDecimilliamps(adcValue);
+	
+	threshold[THRESHOLD_ON] = ctDecimilliampsToCount(dma + (THRESHOLD_ON_MICROAMPS / 100));
+	threshold[THRESHOLD_OFF] = ctDecimilliampsToCount(dma + (THRESHOLD_OFF_MICROAMPS / 100));
+	
+	eeprom_write_byte((uint8_t*)(CHANNEL0_IDLE_CURRENT_DMA), dma);
+	eeprom_write_byte((uint8_t*)(CHANNEL0_THRESHOLD_ON_DMA), dma + (THRESHOLD_ON_MICROAMPS / 100));
+	eeprom_write_byte((uint8_t*)(CHANNEL0_THRESHOLD_OFF_DMA), dma + (THRESHOLD_OFF_MICROAMPS / 100));
+	
+	eeprom_write_word((uint16_t*)(CHANNEL0_IDLE_CURRENT), adcValue);
+	eeprom_write_word((uint16_t*)(CHANNEL0_IDLE_CURRENT_2), ctDecimilliampsToCount(dma));
+	eeprom_write_word((uint16_t*)(CHANNEL0_THRESHOLD_ON), threshold[THRESHOLD_ON]);
+	eeprom_write_word((uint16_t*)(CHANNEL0_THRESHOLD_OFF), threshold[THRESHOLD_OFF]);
+}
 
 
 int main(void)
 {
 	uint16_t i;
-	for(i=0; i<32000; i+=100)
-		testfunc(i);
+	writeThresholdCalibration(0x440);
 }
