@@ -1,0 +1,4 @@
+schematics ckt-bd1-tester.sch
+output-name ../pcb/ckt-bd1-tester
+skip-m4
+elements-dir ../../ise-footprints
