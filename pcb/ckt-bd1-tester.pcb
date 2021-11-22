@@ -1531,10 +1531,6 @@ Layer(3 "outline" "outline")
 )
 Layer(4 "bottom silk" "silk")
 (
-	Line[495.00mil 1635.00mil 495.00mil 3425.00mil 10.00mil 20.00mil "clearline"]
-	Line[495.00mil 3425.00mil 1985.00mil 3425.00mil 10.00mil 20.00mil "clearline"]
-	Line[1985.00mil 1635.00mil 1985.00mil 3425.00mil 10.00mil 20.00mil "clearline"]
-	Line[495.00mil 1635.00mil 1985.00mil 1635.00mil 10.00mil 20.00mil "clearline"]
 )
 Layer(5 "top silk" "silk")
 (
@@ -1583,12 +1579,12 @@ Layer(5 "top silk" "silk")
 	Text[1360.00mil 1565.00mil 2 100 "D" "clearline"]
 	Text[995.00mil 1565.00mil 2 100 "GND" "clearline"]
 	Text[1175.00mil 1565.00mil 2 100 "+V" "clearline"]
-	Text[630.00mil 2890.00mil 0 188 "CKT-BD1 Test Jig v4.1" "clearline"]
 	Text[875.00mil 15.00mil 0 188 "DCC" "clearline"]
 	Text[880.00mil 115.00mil 0 188 "OUT" "clearline"]
 	Text[44.9689mm 275.00mil 1 100 "+" "clearline"]
 	Text[46.8739mm 265.00mil 0 166 "ACTIVE" "clearline"]
 	Text[48.3979mm 160.00mil 0 166 "DCC" "clearline"]
+	Text[625.00mil 2890.00mil 0 187 "CKT-BD1 Test Jig v4.0A" "clearline"]
 	Polygon("clearpoly")
 	(
 		[27.0619mm 85.5449mm] [26.9613mm 3365.20mil] [26.9268mm 85.3631mm] [26.9405mm 85.2830mm] [26.9903mm 3355.10mil] 
