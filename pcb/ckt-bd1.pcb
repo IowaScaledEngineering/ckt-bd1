@@ -1079,7 +1079,7 @@ Element["" "0805" "C2" "1uF" 1040.00mil 1305.00mil -1.50mil 78.50mil 0 100 ""]
 
 	)
 
-Element["hidename" "STANDOFF_HEX_n4" "H4" "unknown" 1825.00mil 1325.00mil 0.0000 100.00mil 0 100 ""]
+Element["hidename" "STANDOFF_HEX_n4" "H4" "unknown" 1830.00mil 1330.00mil 0.0000 100.00mil 0 100 ""]
 (
 	Pin[0.0000 0.0000 293.68mil 20.00mil 299.68mil 128.50mil "screw" "1" ""]
 
@@ -1123,7 +1123,7 @@ Element["hidename" "STANDOFF_HEX_n4" "H2" "unknown" 170.00mil 1330.00mil 0.0000 
 
 	)
 
-Element["hidename" "STANDOFF_HEX_n4" "H3" "unknown" 1825.00mil 165.00mil 0.0000 100.00mil 0 100 ""]
+Element["hidename" "STANDOFF_HEX_n4" "H3" "unknown" 1830.00mil 170.00mil 0.0000 100.00mil 0 100 ""]
 (
 	Pin[0.0000 0.0000 293.68mil 20.00mil 299.68mil 128.50mil "screw" "1" ""]
 
@@ -1178,7 +1178,7 @@ Element["" "SM04B-SRSS" "J1B" "unknown" 12.9600mm 32.8280mm -100.00mil -115.00mi
 
 	)
 
-Element["selected" "TYCO_fsmjsma" "SW1" "unknown" 1520.00mil 505.00mil -45.00mil -205.00mil 0 100 "selected"]
+Element["" "TYCO_fsmjsma" "SW1" "unknown" 1520.00mil 505.00mil -45.00mil -205.00mil 0 100 ""]
 (
 	Attribute("author" "Alexander Kurz")
 	Attribute("copyright" "2008 Alexander Kurz")
@@ -1552,7 +1552,6 @@ Layer(5 "top silk" "silk")
 	Text[1785.00mil 690.00mil 0 100 "+" "clearline"]
 	Text[1910.00mil 590.00mil 1 100 "CAL" "clearline"]
 	Text[1165.00mil 85.00mil 0 100 "CC BY-SA (C) 2022" "clearline"]
-	Text[1285.00mil 155.00mil 0 100 "CKT-BD1 v4.0" "clearline"]
 	Text[1785.00mil 440.00mil 0 100 "+" "clearline"]
 	Text[1790.00mil 940.00mil 0 100 "+" "clearline"]
 	Text[1575.00mil 815.00mil 0 100 "+" "clearline"]
@@ -1560,6 +1559,7 @@ Layer(5 "top silk" "silk")
 	Text[1910.00mil 850.00mil 1 100 "PWR" "clearline"]
 	Text[40.2204mm 33.9281mm 0 100 "*" "clearline"]
 	Text[70.00mil 415.00mil 3 100 "/D" "clearline"]
+	Text[1260.00mil 150.00mil 0 100 "CKT-BD1 v4.0A" "clearline"]
 )
 NetList()
 (
