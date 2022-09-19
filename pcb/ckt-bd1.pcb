@@ -1047,13 +1047,13 @@ Element["hidename" "STANDOFF_HEX_n4" "H3" "unknown" 1830.00mil 170.00mil 0.0000 
 
 	)
 
-Element["" "HOLE_16AWG" "H5A" "unknown" 850.00mil 105.00mil 95.00mil -40.00mil 0 122 ""]
+Element["hidename" "HOLE_16AWG" "H5A" "unknown" 850.00mil 105.00mil 95.00mil -40.00mil 0 122 ""]
 (
 	Pin[0.0000 0.0000 120.00mil 62.00mil 120.00mil 68.00mil "screw" "1" ""]
 
 	)
 
-Element["" "HOLE_16AWG" "H5B" "unknown" 850.00mil 645.00mil 95.00mil -30.00mil 0 122 ""]
+Element["hidename" "HOLE_16AWG" "H5B" "unknown" 850.00mil 645.00mil 95.00mil -30.00mil 0 122 ""]
 (
 	Pin[0.0000 0.0000 120.00mil 62.00mil 120.00mil 68.00mil "screw" "1" ""]
 
@@ -1165,7 +1165,7 @@ Element["" "0805" "C5" "1uF" 1455.00mil 940.00mil -25.00mil 35.00mil 0 100 ""]
 
 	)
 
-Element["onsolder" "SolderJumperSmall" "JP2" "unknown" 600.00mil 910.00mil 95.00mil 30.00mil 0 100 "onsolder"]
+Element["onsolder" "SolderJumperSmall" "JP2" "unknown" 600.00mil 910.00mil -185.00mil 30.00mil 0 100 "onsolder"]
 (
 	Attribute("description" "Soldering Jumper, 60mil, open")
 	Attribute("author" "Stefan Salewski")
@@ -1179,7 +1179,7 @@ Element["onsolder" "SolderJumperSmall" "JP2" "unknown" 600.00mil 910.00mil 95.00
 
 	)
 
-Element["onsolder" "SolderJumperSmall" "JP1" "unknown" 600.00mil 815.00mil 96.00mil 24.57mil 0 100 "onsolder"]
+Element["onsolder" "SolderJumperSmall" "JP1" "unknown" 600.00mil 815.00mil -184.00mil 29.57mil 0 100 "onsolder"]
 (
 	Attribute("description" "Soldering Jumper, 60mil, open")
 	Attribute("author" "Stefan Salewski")
@@ -1572,14 +1572,6 @@ Layer(2 "bottom" "copper")
 	)
 	Polygon("clearpoly")
 	(
-		[775.00mil 1145.00mil] [1190.00mil 1145.00mil] [1190.00mil 15.00mil] [775.00mil 15.00mil] 
-	)
-	Polygon("clearpoly")
-	(
-		[1655.00mil 1205.00mil] [975.00mil 1205.00mil] [975.00mil 15.00mil] [1655.00mil 15.00mil] 
-	)
-	Polygon("clearpoly")
-	(
 		[25.00mil 1485.00mil] [620.00mil 1485.00mil] [620.00mil 15.00mil] [25.00mil 15.00mil] 
 	)
 	Polygon("clearpoly")
@@ -1589,6 +1581,14 @@ Layer(2 "bottom" "copper")
 	Polygon("clearpoly")
 	(
 		[215.00mil 1485.00mil] [810.00mil 1485.00mil] [810.00mil 15.00mil] [215.00mil 15.00mil] 
+	)
+	Polygon("clearpoly")
+	(
+		[775.00mil 1145.00mil] [1190.00mil 1145.00mil] [1190.00mil 15.00mil] [775.00mil 15.00mil] 
+	)
+	Polygon("clearpoly")
+	(
+		[1655.00mil 1205.00mil] [975.00mil 1205.00mil] [975.00mil 15.00mil] [1655.00mil 15.00mil] 
 	)
 )
 Layer(3 "outline" "outline")
@@ -1604,8 +1604,10 @@ Layer(4 "bottom silk" "silk")
 	Line[1995.00mil 5.00mil 1995.00mil 1495.00mil 10.00mil 20.00mil "clearline"]
 	Line[1995.00mil 1495.00mil 5.00mil 1495.00mil 10.00mil 20.00mil "clearline"]
 	Line[5.00mil 1495.00mil 5.00mil 5.00mil 10.00mil 20.00mil "clearline"]
-	Text[485.00mil 500.00mil 0 100 "JP1 - 10k PULL-UP FOR D" "clearline,onsolder"]
-	Text[485.00mil 565.00mil 0 100 "JP2 - 10k PULL-UP FOR /D" "clearline,onsolder"]
+	Text[685.00mil 940.00mil 0 100 "10k PULL-UP" "clearline,onsolder"]
+	Text[1065.00mil 940.00mil 0 100 "FOR /D" "clearline,onsolder"]
+	Text[685.00mil 845.00mil 0 100 "10k PULL-UP" "clearline,onsolder"]
+	Text[1052.00mil 845.00mil 0 100 "FOR D" "clearline,selected,onsolder"]
 )
 Layer(5 "top silk" "silk")
 (
@@ -1633,6 +1635,8 @@ Layer(5 "top silk" "silk")
 	Text[40.2204mm 33.9281mm 0 100 "*" "clearline"]
 	Text[1790.00mil 940.00mil 0 100 "+" "clearline"]
 	Text[33.7434mm 26.0541mm 0 100 "*" "clearline"]
+	Text[960.00mil 45.00mil 0 210 "A" "clearline"]
+	Text[955.00mil 585.00mil 0 210 "B" "clearline"]
 )
 NetList()
 (
