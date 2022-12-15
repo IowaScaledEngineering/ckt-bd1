@@ -38,7 +38,7 @@ PROGRAMMER_PORT=usb
 SRCS = $(BASE_NAME).c ct-linearize.c bd1-hardware.c bd1-interrupts.c
 INCS = ct-linearize.h bd1-interrupts.h bd1-hardware.h
 
-AVRDUDE = avrdude -P $(PROGRAMMER_PORT) -c $(PROGRAMMER_TYPE) -p $(DEVICE) -B16
+AVRDUDE = avrdude -P $(PROGRAMMER_PORT) -c $(PROGRAMMER_TYPE) -p $(DEVICE) -B2
 AVRDUDE_SLOW = avrdude -P $(PROGRAMMER_PORT) -c $(PROGRAMMER_TYPE) -p $(DEVICE) -B32
 
 OBJS = ${SRCS:.c=.o}
@@ -78,7 +78,7 @@ fuse:
 	$(AVRDUDE_SLOW) -U hfuse:w:$(FUSE_H):m -U lfuse:w:$(FUSE_L):m
 
 read:
-	$(AVRDUDE) -v
+	$(AVRDUDE_SLOW) -v
 
 size:
 	avr-size -C --mcu=$(DEVICE) $(BASE_NAME).elf
@@ -86,6 +86,9 @@ size:
 # rule for uploading firmware:
 flash: $(BASE_NAME).hex
 	$(AVRDUDE) -U flash:w:$(BASE_NAME).hex:i
+
+firmware:
+	$(AVRDUDE) -U flash:w:$(HEX):i
 
 prod:
 	$(AVRDUDE) -U flash:w:hex/$(BASE_NAME).hex:i
