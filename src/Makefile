@@ -27,7 +27,7 @@
 BASE_NAME = ckt-bd1
 
 # ATtiny85 8MHz internal oscillator
-DEVICE  = attiny85
+DEVICE  = attiny25
 F_CPU   = 8000000
 FUSE_L  = 0xE2
 FUSE_H  = 0xC5

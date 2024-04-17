@@ -1,0 +1,34 @@
+#!/bin/bash
+
+while true
+do
+	make read > /dev/null 2> /dev/null
+
+	while [ $? -ne 0 ]
+	do
+		echo -n .
+		make read > /dev/null 2> /dev/null
+	done
+
+	echo -e "\n\033[1;33mProgramming\033[0m\n"
+	espeak "Programming"
+
+	make fuse
+	make firmware HEX=release/ckt-bd1-tiny25-2e6aae3-6Oct2023.hex
+
+
+	if [ $? -eq 0 ]
+	then 
+		echo -e "\033[0;32mComplete\033[0m\n"
+		espeak "Complete"
+	else 
+		echo -e "\033[0;31mFailed\033[0m\n"
+		espeak "Failed"
+	fi
+	
+	sleep 1
+
+#	read -t 0.1 -n 1000 discard
+#	read -n 1 -p "Press any key to continue..."
+#	echo
+done
